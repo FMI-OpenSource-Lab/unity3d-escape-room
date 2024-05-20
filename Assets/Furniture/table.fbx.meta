@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 124806d2a3f216b4abe204b8bc0689c2
+guid: 07c0974cf3d766b45945c4842ed7284e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: marble
+    second: {fileID: 2100000, guid: 90802d4c7c6ae85478afd7df9f8191a8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
