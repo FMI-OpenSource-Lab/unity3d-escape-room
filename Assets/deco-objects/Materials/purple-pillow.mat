@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: purple-pillow
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 2100000, guid: 00151b8a336a408438aa47859b5489a3, type: 2}
+  m_Parent: {fileID: 2100000, guid: 0783fdfba3f0c0f479dd8a8406db3b41, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
