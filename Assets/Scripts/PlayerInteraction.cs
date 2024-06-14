@@ -7,14 +7,18 @@ using TMPro;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public float interactDistance = 20f;
+        public float interactDistance = 15f;
     public LayerMask interactableLayer;
     public GameObject interactPromptUI;
     public TextMeshProUGUI interactPromptText;
     public GameObject passwordPanel;
     public TMP_InputField passwordInputField;
     public TextMeshProUGUI hintText;
-    public PlayerActionsManager2 playerActionsManager; // Reference to PlayerActionsManager
+    public GameObject congratsPanel; // Add reference to the congratulations panel
+    public GameObject bookPanel;
+    public Image bookImage;
+    public Button closeButton;
+    public PlayerActionsManager2 playerActionsManager; // Reference to PlayerActionsManager2
 
     private Camera mainCamera;
     private GameObject currentInteractable;
@@ -42,69 +46,134 @@ public class PlayerInteraction : MonoBehaviour
         mainCamera = Camera.main;
         interactPromptUI.SetActive(false);
         passwordPanel.SetActive(false); // Ensure the panel is hidden initially
+        congratsPanel.SetActive(false); // Ensure the congratulations panel is hidden initially
+        bookPanel.SetActive(false);
+
+        closeButton.onClick.AddListener(CloseBookPanel);
     }
 
     void Update()
     {
-        if (!passwordPanel.activeSelf) // Only check for interactables if the password panel is not active
+        if (!passwordPanel.activeSelf && !congratsPanel.activeSelf) // Only check for interactables if panels are not active
         {
             CheckForInteractable();
         }
     }
 
     void CheckForInteractable()
+{
+    Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
+    RaycastHit hit;
+
+    if (Physics.Raycast(ray, out hit, interactDistance, interactableLayer))
     {
-        Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
-        RaycastHit hit;
+        GameObject hitObject = hit.collider.gameObject;
+        Debug.Log("Raycast hit: " + hitObject.name); // Log the name of the hit object
 
-        if (Physics.Raycast(ray, out hit, interactDistance, interactableLayer))
-        {
-            GameObject hitObject = hit.collider.gameObject;
-            Debug.Log("Raycast hit: " + hitObject.name); // Log the name of the hit object
-
-            if (hitObject != currentInteractable)
-            {
-                if (currentInteractable != null && outlineEffect != null)
-                {
-                    outlineEffect.enabled = false;
-                }
-
-                currentInteractable = hitObject;
-                outlineEffect = currentInteractable.GetComponent<Outline>();
-                if (outlineEffect != null)
-                {
-                    outlineEffect.enabled = true;
-                    ShowInteractPrompt("Open");
-                }
-            }
-        }
-        else
+        if (hitObject != currentInteractable)
         {
             if (currentInteractable != null && outlineEffect != null)
             {
                 outlineEffect.enabled = false;
             }
-            currentInteractable = null;
-            HideInteractPrompt();
-        }
-    }
 
-    void HandleInteraction()
-    {
-        Debug.Log("HandleInteraction called"); // Debug log to confirm interaction handling
-        if (currentInteractable != null)
-        {
-            Debug.Log("Current interactable: " + currentInteractable.name); // Log the name of the current interactable
-            if (currentInteractable.CompareTag("Safe"))
+            currentInteractable = hitObject;
+            outlineEffect = currentInteractable.GetComponent<Outline>();
+            if (outlineEffect != null)
             {
-                ShowPasswordPanel("Hmm.. seems like someone is trying to open the safe. If you are that curious why don't you go eat some cookies or drink some coffee or maybe even read a book. You might find something interesting there.");
+                outlineEffect.enabled = true;
+                Debug.Log("Outline enabled on: " + currentInteractable.name); // Debug log for outline
+                if (currentInteractable.CompareTag("Safe"))
+                {
+                    ShowInteractPrompt("Open");
+                }
+                else if (currentInteractable.CompareTag("Key"))
+                {
+                    ShowInteractPrompt("Pick up key");
+                }
+                else if (currentInteractable.CompareTag("GlassCover"))
+                {
+                    ShowInteractPrompt("Open");
+                }
+                else if (currentInteractable.CompareTag("Cookie"))
+                {
+                    ShowInteractPrompt("Eat cookie");
+                }
+                else if (currentInteractable.CompareTag("Coffee"))
+                {
+                    ShowInteractPrompt("Drink coffee");
+                }
+                else if (currentInteractable.CompareTag("Book"))
+                {
+                    ShowInteractPrompt("Read book");
+                }
+            }
+            else
+            {
+                Debug.LogError("No Outline component found");
             }
         }
-        else
+    }
+    else
+    {
+        if (currentInteractable != null && outlineEffect != null)
         {
-            Debug.LogError("No current interactable set");
+            outlineEffect.enabled = false;
+        }
+        currentInteractable = null;
+        HideInteractPrompt();
+    }
+}
+
+void HandleInteraction()
+{
+    if (currentInteractable != null)
+    {
+        if (currentInteractable.CompareTag("Safe"))
+        {
+            ShowPasswordPanel("Enter the password to open the safe. Hint: Check the recipe book.");
+        }
+        else if (currentInteractable.CompareTag("Key"))
+        {
+            KeyInteract keyInteract = currentInteractable.GetComponent<KeyInteract>();
+            if (keyInteract != null)
+            {
+                keyInteract.PickUpKey();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                playerActionsManager.SetCanLook(false);
+            }
+        }
+        else if (currentInteractable.CompareTag("GlassCover"))
+        {
+            GlassCoverInteract glassCoverInteract = currentInteractable.GetComponent<GlassCoverInteract>();
+            if (glassCoverInteract != null)
+            {
+                glassCoverInteract.OpenGlassCover();
+            }
+        }
+        else if (currentInteractable.CompareTag("Cookie"))
+        {
+            CookieInteract cookieInteract = currentInteractable.GetComponent<CookieInteract>();
+            if (cookieInteract != null)
+            {
+                cookieInteract.EatCookie();
+            }
+        }
+        else if (currentInteractable.CompareTag("Coffee"))
+        {
+            CoffeeInteract coffeeInteract = currentInteractable.GetComponent<CoffeeInteract>();
+            if (coffeeInteract != null)
+            {
+                coffeeInteract.DrinkCoffee();
+            }
+        }
+        else if (currentInteractable.CompareTag("Book"))
+        {
+            ShowBookPanel();
         }
     }
+}
 
     void ShowInteractPrompt(string message)
     {
@@ -157,4 +226,22 @@ public class PlayerInteraction : MonoBehaviour
         Cursor.visible = false;
         playerActionsManager.SetCanLook(true); // Re-enable camera movement
     }
+
+
+        void ShowBookPanel()
+    {
+        bookPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        playerActionsManager.SetCanLook(false);
+    }
+
+    void CloseBookPanel()
+    {
+        bookPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        playerActionsManager.SetCanLook(true);
+    }
+
 }

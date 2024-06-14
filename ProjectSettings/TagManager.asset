@@ -6,6 +6,11 @@ TagManager:
   tags:
   - PasswordInputField
   - Safe
+  - Key
+  - GlassCover
+  - Cookie
+  - Coffee
+  - Book
   layers:
   - Default
   - TransparentFX
