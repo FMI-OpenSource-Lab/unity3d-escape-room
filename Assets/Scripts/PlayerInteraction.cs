@@ -7,7 +7,7 @@ using TMPro;
 
 public class PlayerInteraction : MonoBehaviour
 {
-        public float interactDistance = 15f;
+    public float interactDistance = 25f;
     public LayerMask interactableLayer;
     public GameObject interactPromptUI;
     public TextMeshProUGUI interactPromptText;
@@ -131,7 +131,7 @@ void HandleInteraction()
     {
         if (currentInteractable.CompareTag("Safe"))
         {
-            ShowPasswordPanel("Enter the password to open the safe. Hint: Check the recipe book.");
+            ShowPasswordPanel("Hmm.. seems like someone is trying to open the safe. If you are that curious why don't you go eat some cookies or drink some coffee or maybe even read a book. You might find something interesting there.");
         }
         else if (currentInteractable.CompareTag("Key"))
         {
