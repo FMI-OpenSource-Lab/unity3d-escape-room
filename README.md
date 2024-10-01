@@ -19,11 +19,9 @@ Load the project file in Unity and it is showtime!
 
 Join our discord for discussions and collaboration.
 
-<a target="_blank" href="https://discord.gg/Vkv3ne4zVK"><?xml version="1.0" encoding="UTF-8"?>
-<img src="https://github.com/user-attachments/assets/1d8e56d2-1254-4d01-b5fa-99f0877729e5" />
-
+<a target="_blank" href="https://discord.com/channels/1286675578572898396/1286675579126550581"><?xml version="1.0" encoding="UTF-8"?>
+  <img src="https://github.com/user-attachments/assets/1d8e56d2-1254-4d01-b5fa-99f0877729e5" />
 </a>
-![discord](https://github.com/user-attachments/assets/1d8e56d2-1254-4d01-b5fa-99f0877729e5)
 
 
  ###  :fire: Contribution
