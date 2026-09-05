@@ -2,7 +2,7 @@
 
 # Introduction
 
-unity3d escape room is a rpg game whose goal is to escape a room given clues and hidden directions on how to do so.
+unity3d escape room is a rpg game whose goal is to escape rooms given clues and hidden directions on how to do so.
 
 ##  :beginner: About
 
@@ -10,18 +10,11 @@ UER is Unity based game that loads multiple author made Blender based models.
 
 
 ## :rocket: Demo
-<img width="1792" alt="Screenshot 2024-10-01 at 15 38 36" src="https://github.com/user-attachments/assets/cca9dd5e-f74d-49ad-a551-683f4823608e">
+<img width="1792" alt="Screenshot 2024-10-01 at 15 38 36 Level One Bakery" src="https://github.com/user-attachments/assets/cca9dd5e-f74d-49ad-a551-683f4823608e">
+<img width="1792" alt="Screenshot 2026-10-01 at 15 38 36 Level Two Bakery" src="https://github.com/user-attachments/assets/cca9dd5e-f74d-49ad-a551-683f4823608e">
 
 ## :zap: Development
-Load the project file in Unity and it is showtime!
-
-## :cherry_blossom: Community
-
-Join our discord for discussions and collaboration.
-
-<a target="_blank" href="https://discord.com/channels/1286675578572898396/1286675579126550581"><?xml version="1.0" encoding="UTF-8"?>
-  <img src="https://github.com/user-attachments/assets/1d8e56d2-1254-4d01-b5fa-99f0877729e5" />
-</a>
+Load the project file in Unity !
 
 
  ###  :fire: Contribution
