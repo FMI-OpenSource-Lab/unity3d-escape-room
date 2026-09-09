@@ -14,8 +14,13 @@ UER is Unity based game that loads multiple author made Blender based models.
 <img width="1792" alt="Screenshot 2026-10-01 at 15 38 36 Level Two Bakery" src="https://github.com/user-attachments/assets/cca9dd5e-f74d-49ad-a551-683f4823608e">
 
 ## :zap: Development
-Load the project file in Unity !
+Load the project file in Unity and it is showtime!
 
+Join our discord for discussions and collaboration.
+
+<a target="_blank" href="https://discord.com/channels/1286675578572898396/1286675579126550581"><?xml version="1.0" encoding="UTF-8"?>
+  <img src="https://github.com/user-attachments/assets/1d8e56d2-1254-4d01-b5fa-99f0877729e5" />
+</a>
 
  ###  :fire: Contribution
 
@@ -32,4 +37,5 @@ Load the project file in Unity !
 
 
 ## Issues
-1. Fix bug when opening/closing the chest
+1. Fix bug when opening/closing the safe
+2. Fix missing outline effect on books and key hooks
